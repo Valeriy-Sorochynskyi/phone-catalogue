@@ -2,13 +2,24 @@
 export default class PhoneViewer {
     constructor({ element }) {
       this._element = element;
-  
+        
+    }
+    
+    show(phoneDetails){
+      this._phoneDetails = phoneDetails;
+      this._element.hidden = false;
+
       this._render();
     }
-  
+
     _render() {
+
+      const phone = this._phoneDetails;
+
+
       this._element.innerHTML = `
-        <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
+        <img class="phone" src="${ phone.images[0] }">
+        
         <button>Back</button>
         <button>Add to basket</button>
     
