@@ -1,6 +1,5 @@
 'use strict'
-
-class PhoneCatalog {
+export default class PhoneCatalog {
     constructor({ element }) {
       this._element = element;
   
