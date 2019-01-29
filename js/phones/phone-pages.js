@@ -9,27 +9,35 @@ export default class PhonePages {
     this._element = element;
 
     this._render();
+    
+    this._initCatalog();
+    this._initViewer();
+  }
 
+  _initCatalog() {
     this._catalog = new PhoneCatalog({
-        element: document.querySelector('[data-component="phone-catalog"]'),
-        phones: PhoneService.getAll(),
+      element: document.querySelector('[data-component="phone-catalog"]'),
+      phones: PhoneService.getAll(),
+ 
+    });
 
-        onPhoneSelected: (phoneId) => {
-          const phoneDetails = PhoneService.getById(phoneId);
+    this._catalog.subscribe('phone-selected', (phoneId) => {
+      const phoneDetails = PhoneService.getById(phoneId);
 
-          this._catalog.hide();
-          this._viewer.show(phoneDetails);
-        },
-      });
+      this._catalog.hide();
+      this._viewer.show(phoneDetails);
+    });
+  }
+
+  _initViewer() {
     this._viewer = new PhoneViewer({
-        element: document.querySelector('[data-component="phone-viewer"]'),
-        onBack: () => {
-          this._catalog.show();
-          this._viewer.hide();
-        }
-      });
+      element: document.querySelector('[data-component="phone-viewer"]'),
+    });
 
-      
+    this._viewer.subscribe('back', () => {
+      this._catalog.show();
+      this._viewer.hide();
+    });
   }
 
   _render() {
