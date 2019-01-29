@@ -1,4 +1,4 @@
-'use strict'
+
 import PhonePages from './phones/phone-pages.js'
 
 const currentPage = new PhonePages({

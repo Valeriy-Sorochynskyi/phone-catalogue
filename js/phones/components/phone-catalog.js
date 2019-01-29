@@ -1,33 +1,49 @@
-"use strict";
-export default class PhoneCatalog {
+import Component from '../../component.js';
+
+export default class PhoneCatalog extends Component {
   constructor({ element, 
     phones = [],
      onPhoneSelected = () => {} 
     }) {
-    this._element = element;
+
+    super( {element} );  
+
     this._phones = phones;
     this._render();
     this._onPhoneSelected = onPhoneSelected; 
+    
     this._element.addEventListener('click', (event) =>{
-      let phoneElement = event.target.closest('[data-element ="phone"]');
-      if (!phoneElement) return;
+      let detailsLink = event.target.closest('[data-element ="details-link"]');
+      
+      if (!detailsLink) return;
+
+      let phoneElement = detailsLink.closest('[data-element="phone"]');
 
       this._onPhoneSelected(phoneElement.dataset.phoneId);
       
     })
   }
 
-  hide(){
-    this._element.hidden = true;
-  }
+  
 
   _render() {
     this._element.innerHTML = `
         <ul class="phones">
           ${ this._phones.map(phone => `
-          <li class="thumbnail" data-element = "phone" data-phone-id = "${ phone.id }">
-            <a href="#!/phones/${ phone.id }" class="thumb">
-              <img alt="${ phone.name }" src="${ phone.imageUrl }">
+          <li 
+            data-element = "phone" 
+            data-phone-id = "${ phone.id }"
+            class="thumbnail"
+          >
+            <a 
+              data-element="details-link"
+              href="#!/phones/${ phone.id }" 
+              class="thumb" 
+            >
+              <img 
+                alt="${ phone.name }" 
+                src="${ phone.imageUrl }"
+              >
             </a>
 
             <div class="phones__btn-buy-wrapper">
@@ -36,7 +52,12 @@ export default class PhoneCatalog {
               </a>
             </div>
 
-            <a href="#!/phones/motorola-xoom-with-wi-fi">${ phone.id }</a>
+            <a 
+              href="#!/phones/motorola-xoom-with-wi-fi"
+              data-element="details-link"
+            >
+              ${ phone.id }
+            </a>
             <p>${ phone.snippet }</p>
           </li>
           
