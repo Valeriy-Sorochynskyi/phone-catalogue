@@ -1428,12 +1428,47 @@ const phoneDetailes = [
 
 
 const PhoneService = {
-    getAll() {
-        return phonesFromServer;
+    getAll( {query = '', sortBy = '' } = {} ) {
+      console.log(query, sortBy);
+      
+
+      const filteredPhones = this._filter(phonesFromServer, query);
+      const sortedPhones = this._sortBy(filteredPhones, sortBy);
+      
+      
+        return sortedPhones;
     },
     getById(phoneId) {
         return phoneDetailes.find(phone => phone.id === phoneId);
     },
+
+    _filter(phones, query) {
+      return phones.filter((phone) => {
+        if (phone['name'].includes(query.toLowerCase())) {
+          return true;
+        }
+      });
+    },
+
+    _sortBy(phones, sortBy){
+      if (sortBy === 'age'){
+        return phones.sort((a, b) => {
+          return a['age'] - b['age'];
+        });
+      }
+
+      if (sortBy === 'name'){
+        return phones.sort((a, b) => {
+          if (a['name'] > b['name']){
+            return 1;
+          }
+          if (a['name'] < b['name']){
+            return -1;
+          }
+        });
+      }
+      
+    }
 };
 
 export default PhoneService;

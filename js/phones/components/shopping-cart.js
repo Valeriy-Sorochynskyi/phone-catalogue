@@ -37,17 +37,24 @@ export default class ShoppingCart extends Component {
   }
 
   _render() {
+    let itemIds = Object.entries(this._itemsMap);
     this._element.innerHTML = `
-				<p>Shopping Cart</p>
+        <h4>Shopping Cart</h4>
+        
+        ${ itemIds.length > 0 ? `
         <ul>
-          ${Object.entries(this._itemsMap).map( ([itemId, quantity])=> `
-          
-          <li data-element="item" data-item-id="${itemId}">
-            ${itemId} (${quantity})
-            <button data-element="remove">-</button>
-          </li>
-        `).join('')}
-        </ul>
+        ${itemIds.map( ([itemId, quantity])=> `
+        
+        <li data-element="item" data-item-id="${itemId}">
+          ${itemId} (${quantity})
+          <button data-element="remove">-</button>
+        </li>
+      `).join('')}
+      </ul>
+        ` : `
+        <p>No items yet</p>
+        `}
+        
         `;
   }
 

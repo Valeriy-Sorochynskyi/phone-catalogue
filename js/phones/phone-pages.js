@@ -12,18 +12,20 @@ export default class PhonePages {
 
     this._render();
     
+    this._initFilter();
     this._initCatalog();
     this._initViewer();
     this._initShoppingCart();
-    this._initFilter();
   }
 
   _initCatalog() {
+    
     this._catalog = new PhoneCatalog({
       element: document.querySelector('[data-component="phone-catalog"]'),
-      phones: PhoneService.getAll(),
- 
+       
     });
+
+    this._showPhones();
 
     this._catalog.subscribe('phone-selected', (phoneId) => {
       const phoneDetails = PhoneService.getById(phoneId);
@@ -64,8 +66,23 @@ export default class PhonePages {
     this._filter = new Filter({
       element: document.querySelector('[data-component="filter"]'),
     });
+
+    this._filter.subscribe('order-changed', () => {
+      this._showPhones();
+    });
+    
+    this._filter.subscribe('query-changed', () => {
+      this._showPhones();
+
+    });
   }
   
+  _showPhones() {
+    let currentFiltering = this._filter.getCurrentData();
+      let phones = PhoneService.getAll( currentFiltering );
+      
+      this._catalog.show(phones);
+  }
 
   
   _render() {
