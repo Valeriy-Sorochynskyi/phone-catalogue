@@ -1444,9 +1444,9 @@ const PhoneService = {
 
     _filter(phones, query) {
       return phones.filter((phone) => {
-        if (phone['name'].includes(query.toLowerCase())) {
-          return true;
-        }
+        
+          return phone['name'].toLowerCase().includes(query.toLowerCase());
+        
       });
     },
 
