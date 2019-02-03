@@ -31,6 +31,10 @@ export default class PhonePages {
       this._catalog.hide();
       this._viewer.show(phoneDetails);
     });
+
+    this._catalog.subscribe('added', (phoneId) => {
+      this._cart.addItem(phoneId);
+    });
   }
 
   _initViewer() {
@@ -42,16 +46,22 @@ export default class PhonePages {
       this._catalog.show();
       this._viewer.hide();
     });
+
+    this._viewer.subscribe('added', (phoneId) => {
+      this._cart.addItem(phoneId);
+    });
   }
 
   _initShoppingCart() {
     this._cart = new ShoppingCart({
       element: document.querySelector('[data-component="shopping-cart"]'),
     });
+
+  
   }
 
   _initFilter() {
-    this._cart = new Filter({
+    this._filter = new Filter({
       element: document.querySelector('[data-component="filter"]'),
     });
   }
