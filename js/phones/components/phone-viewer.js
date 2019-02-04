@@ -60,8 +60,6 @@ export default class PhoneViewer extends Component {
             >
           </li>
           `).join('') }
-          
-                    
         </ul>
       `;
     }

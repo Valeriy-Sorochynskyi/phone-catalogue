@@ -1429,9 +1429,6 @@ const phoneDetailes = [
 
 const PhoneService = {
     getAll( {query = '', sortBy = '' } = {} ) {
-      console.log(query, sortBy);
-      
-
       const filteredPhones = this._filter(phonesFromServer, query);
       const sortedPhones = this._sortBy(filteredPhones, sortBy);
       

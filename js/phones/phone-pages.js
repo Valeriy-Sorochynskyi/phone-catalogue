@@ -45,7 +45,7 @@ export default class PhonePages {
     });
 
     this._viewer.subscribe('back', () => {
-      this._catalog.show();
+      this._showPhones();
       this._viewer.hide();
     });
 
