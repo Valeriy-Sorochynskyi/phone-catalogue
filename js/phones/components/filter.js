@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Component from '../../component.js';
 
 // eslint-disable-next-line prefer-destructuring

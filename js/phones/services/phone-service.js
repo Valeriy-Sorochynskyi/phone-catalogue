@@ -20,6 +20,7 @@ const PhoneService = {
     return fetch(`${BASE_URL + url }.json`)
       .then(response => response.json())
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.warn(error);
 
         return Promise.reject(error);
