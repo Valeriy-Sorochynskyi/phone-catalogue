@@ -2,22 +2,22 @@ import Component from '../../component.js';
 
 export default class PhoneCatalog extends Component {
   constructor({ element }) {
+    super({ element });
 
-    super( {element} );  
     this._phones = [];
-        
+
     this._render();
-    
+
     this.on('click', 'details-link', (event) => {
-      let phoneElement = event.target.closest('[data-element="phone"]');
+      const phoneElement = event.target.closest('[data-element="phone"]');
 
       this.emit('phone-selected', phoneElement.dataset.phoneId);
-      
     });
 
-    this.on('click', 'add-button-catalog', (event) => {
-      let phoneElement = event.target.closest('[data-element="phone"]');
-      this.emit('added', phoneElement.dataset.phoneId );
+    this.on('click', 'add-button', (event) => {
+      const phoneElement = event.target.closest('[data-element="phone"]');
+
+      this.emit('phone-added', phoneElement.dataset.phoneId);
     });
   }
 
@@ -27,45 +27,48 @@ export default class PhoneCatalog extends Component {
     super.show();
 
     this._render();
-  }   
- 
+  }
+
   _render() {
     this._element.innerHTML = `
-        <ul class="phones">
-          ${ this._phones.map(phone => `
-          <li 
-            data-element = "phone" 
-            data-phone-id = "${ phone.id }"
+      <ul class="phones">
+        ${ this._phones.map(phone => `
+        
+          <li
+            data-element="phone"
+            data-phone-id="${ phone.id }"
             class="thumbnail"
           >
-            <a 
+            <a
               data-element="details-link"
-              href="#!/phones/${ phone.id }" 
-              class="thumb" 
+              href="#!/phones/${ phone.id }"
+              class="thumb"
             >
-              <img 
-                alt="${ phone.name }" 
+              <img
+                alt="${ phone.name }"
                 src="${ phone.imageUrl }"
               >
             </a>
-
+  
             <div class="phones__btn-buy-wrapper">
-              <a class="btn btn-success" data-element="add-button-catalog">
+              <button class="btn btn-success" data-element="add-button">
                 Add
-              </a>
+              </button>
             </div>
-
-            <a 
-              href="#!/phones/motorola-xoom-with-wi-fi"
+  
+            <a
               data-element="details-link"
+              href="#!/phones/motorola-xoom-with-wi-fi"
             >
-              ${ phone.id }
+              ${ phone.name }
             </a>
+            
             <p>${ phone.snippet }</p>
           </li>
-          
-          `).join('')}
-        </ul>
-        `;
+        
+        
+        `).join('') }
+      </ul>
+    `;
   }
 }
