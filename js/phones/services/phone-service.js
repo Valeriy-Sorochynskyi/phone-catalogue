@@ -1,4 +1,4 @@
-const BASE_URL = 'https://mate-academy.github.io/phone-catalogue-static';
+const BASE_URL = 'https://github.com/Valeriy-Sorochynskyi/phone-catalogue/tree/gh-pages';
 // const BASE_URL = 'http://localhost:8080';
 
 const PhoneService = {
