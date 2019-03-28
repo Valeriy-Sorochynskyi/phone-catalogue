@@ -1,0 +1,26 @@
+{
+  "name": "phone-catalogue",
+  "version": "1.0.0",
+  "description": "- [preview](https://valeriy-sorochynskyi.github.io/phone-catalogue/)\r - [PR](https://github.com/Valeriy-Sorochynskyi/phone-catalogue/pull/1)",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Valeriy-Sorochynskyi/phone-catalogue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Valeriy-Sorochynskyi/phone-catalogue/issues"
+  },
+  "homepage": "https://github.com/Valeriy-Sorochynskyi/phone-catalogue#readme",
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "dependencies": {}
+}
